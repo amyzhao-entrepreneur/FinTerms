@@ -1,44 +1,29 @@
 # FinTerms
 
-West Coast terms assistant for fintech startups — draft, review, and rewrite consumer agreements for **Washington, Oregon, and California**, with citation-backed findings.
+West Coast terms assistant for fintech startups (WA / OR / CA).
 
-**Not legal advice. Not a compliance certificate. Not a substitute for counsel.**
+**Orchestrator: Rocket Ride Cloud** — pipeline file [`finterms.pipe`](./finterms.pipe).
 
-## Quick start (local prototype)
+## Pipeline (explain this to judges)
 
-1. Put your OpenAI key in `.env` as `ROCKETRIDE_OPENAI_KEY=sk-...` (see `.env.example`)
-2. Install Node 22+ and run:
+```text
+Webhook → Question → Prompt (MODE stages) → LLM → Return Answers
 
-```bash
-npm install
-npm run dev
+Chat → ScopeGate → Clarify → Analyze → Cite/Rank → Agent (+ Memory) → Return Answers
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000)
-4. Click **Load sample payments ToS** → continue through questions → review findings → accept a rewrite
+Stages: ScopeGate → Clarify → Analyze → Cite/Rank → Rewrite (citation allowlist only).
 
-## Pipeline (orchestration)
+## Run
 
-Rocket Ride Cloud orchestrates:
+1. `.env` from `.env.example`:
+   - `ROCKETRIDE_URI=https://api.rocketride.ai`
+   - `ROCKETRIDE_APIKEY=...`
+   - `ROCKETRIDE_OPENAI_KEY=...` (for the LLM node inside the pipe)
+2. `npm install && npm run dev`
+3. UI calls Rocket Ride via Webhook source (`src/lib/rocketride-client.ts`)
+4. Or open `finterms.pipe` in Cursor → Play **Chat**
 
-1. ScopeGate  
-2. Clarify  
-3. Analyze (OpenAI)  
-4. Cite/Rank (allowlisted citation pack)  
-5. Rewrite (OpenAI)
+## Docs
 
-Local mirror: `POST /api/pipeline`  
-Cloud instructions: [`docs/SETUP_ROCKETRIDE.md`](docs/SETUP_ROCKETRIDE.md)  
-GitHub instructions: [`docs/SETUP_GITHUB.md`](docs/SETUP_GITHUB.md)
-
-## Repo docs
-
-- [`spec.md`](spec.md) — product spec  
-- [`plan.md`](plan.md) — hackathon plan  
-- [`tasks.md`](tasks.md) — task checklist  
-- [`data/citation-pack.json`](data/citation-pack.json) — allowlisted sources  
-- [`rocketride/PIPELINE.md`](rocketride/PIPELINE.md) — Cloud pipeline contract  
-
-## Example cited output
-
-Findings include plain-language risk, suggested rewrite, and a source URL from Cite/Rank, e.g. California CLRA / CCPA / Washington CPA entries in the citation pack.
+[`spec.md`](spec.md) · [`rocketride/PIPELINE.md`](rocketride/PIPELINE.md) · [`docs/SETUP_ROCKETRIDE.md`](docs/SETUP_ROCKETRIDE.md)

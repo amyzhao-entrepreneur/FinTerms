@@ -142,6 +142,10 @@ export default function Home() {
           Draft, review, and rewrite consumer agreements for Washington, Oregon,
           and California — with citation-backed findings.
         </p>
+        <p className="mt-2 text-sm font-semibold text-teal-900">
+          Powered by Rocket Ride Cloud · pipeline{" "}
+          <code className="font-mono">finterms.pipe</code>
+        </p>
         <p className="mt-4 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-950">
           Not legal advice, not a compliance certificate, and not a substitute
           for counsel. Decision-support only — you own the final terms.

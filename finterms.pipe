@@ -1,0 +1,516 @@
+{
+	"components": [
+		{
+			"id": "webhook_1",
+			"provider": "webhook",
+			"config": {
+				"hideForm": true,
+				"mode": "Source",
+				"parameters": {},
+				"type": "webhook"
+			},
+			"ui": {
+				"position": {
+					"x": 40,
+					"y": 40
+				},
+				"measured": {
+					"width": 170,
+					"height": 90
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "question_web_1",
+			"provider": "question",
+			"config": {
+				"type": "question"
+			},
+			"input": [
+				{
+					"lane": "text",
+					"from": "webhook_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 240,
+					"y": 50
+				},
+				"measured": {
+					"width": 150,
+					"height": 70
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "prompt_web_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"You are FinTerms on Rocket Ride Cloud for WA/OR/CA fintech consumer terms. Founder-friendly. Not legal advice; not a compliance certificate; not a substitute for counsel.",
+					"Run the FinTerms pipeline stages in order, but only emit the JSON for the requested MODE:",
+					"SCOPEGATE: other US state or non-finance field \u2192 ONLY {\"redirect\":\"We don't currently serve [state or field], but we will be expanding there soon. Please see our services for financial startups in Washington, Oregon, and California.\"}",
+					"MODE clarify \u2192 ONLY {\"questions\":[\"...\"]} (3\u20135 short questions on product, fees, data, disputes).",
+					"MODE analyze \u2192 exhaustive first-pass findings (~99% material issues) across money, rights, data, future_problems, enforceability, regulatory_friction, conversion_trust. Then Cite/Rank: attach 1\u20132 citations ONLY from CITATION PACK (never invent URLs). Prefer official_statute > official_guidance > gov_explainer. Else citation_status=uncertain, citations=[]. Return {\"findings\":[...]} with id, risk_types, severity, title, plain_language_explanation, clause_excerpt, suggested_rewrite, state_relevance, topics, citations, citation_status.",
+					"MODE rewrite \u2192 ONLY {\"prior_draft\":\"...\",\"current_draft\":\"...\"} applying accepted suggested_rewrite values.",
+					"Always return ONLY JSON.",
+					"CITATION PACK: [{\"label\":\"CA CLRA\",\"url\":\"https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CIV&division=3.&title=1.5.&part=4.&chapter=1.&article=\",\"trust\":\"official_statute\"},{\"label\":\"CA CCPA\",\"url\":\"https://oag.ca.gov/privacy/ccpa\",\"trust\":\"official_guidance\"},{\"label\":\"CA UCL \u00a717200\",\"url\":\"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&sectionNum=17200.\",\"trust\":\"official_statute\"},{\"label\":\"WA CPA RCW 19.86\",\"url\":\"https://app.leg.wa.gov/RCW/default.aspx?cite=19.86\",\"trust\":\"official_statute\"},{\"label\":\"WA AG privacy\",\"url\":\"https://www.atg.wa.gov/privacy\",\"trust\":\"gov_explainer\"},{\"label\":\"OR UTPA\",\"url\":\"https://www.oregonlegislature.gov/bills_laws/ors/ors646.html\",\"trust\":\"official_statute\"},{\"label\":\"Oregon DOJ Consumer Protection\",\"url\":\"https://www.doj.state.or.us/consumer-protection/\",\"trust\":\"gov_explainer\"},{\"label\":\"FTC .com Disclosures\",\"url\":\"https://www.ftc.gov/business-guidance/resources/com-disclosures-how-make-effective-disclosures-digital-world\",\"trust\":\"gov_explainer\"},{\"label\":\"CFPB bank accounts\",\"url\":\"https://www.consumerfinance.gov/consumer-tools/bank-accounts/\",\"trust\":\"gov_explainer\"}]"
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "question_web_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 440,
+					"y": 40
+				},
+				"measured": {
+					"width": 180,
+					"height": 90
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_web_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_web_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 680,
+					"y": 50
+				},
+				"measured": {
+					"width": 160,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "response_web_1",
+			"provider": "response_answers",
+			"config": {
+				"laneName": "answers"
+			},
+			"input": [
+				{
+					"lane": "answers",
+					"from": "llm_web_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 900,
+					"y": 50
+				},
+				"measured": {
+					"width": 170,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "chat_1",
+			"provider": "chat",
+			"config": {
+				"hideForm": true,
+				"mode": "Source",
+				"parameters": {},
+				"type": "chat"
+			},
+			"ui": {
+				"position": {
+					"x": 40,
+					"y": 300
+				},
+				"measured": {
+					"width": 170,
+					"height": 90
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "prompt_scope_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"STAGE 1 \u2014 ScopeGate. FinTerms is WA/OR/CA fintech only. Not legal advice; not a compliance certificate; not a substitute for counsel.",
+					"If another US state or non-finance field appears, return ONLY {\"redirect\":\"We don't currently serve [state or field], but we will be expanding there soon. Please see our services for financial startups in Washington, Oregon, and California.\"}",
+					"Otherwise return {\"scope\":\"in\",\"message\":<full user message preserved>}."
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "chat_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 240,
+					"y": 240
+				},
+				"measured": {
+					"width": 150,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_scope_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_scope_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 420,
+					"y": 240
+				},
+				"measured": {
+					"width": 140,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "prompt_clarify_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"STAGE 2 \u2014 Clarify. If redirect JSON is present, return it unchanged.",
+					"Else return {\"questions\":[\"...\"]} with 3\u20135 short founder questions (product, fees, data, disputes) and keep \"message\" from prior stage."
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "llm_scope_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 600,
+					"y": 240
+				},
+				"measured": {
+					"width": 150,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_clarify_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_clarify_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 780,
+					"y": 240
+				},
+				"measured": {
+					"width": 140,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "prompt_analyze_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"STAGE 3 \u2014 Analyze. If redirect present, return it unchanged.",
+					"Else EXHAUSTIVE first-pass (~99% material issues) across money, rights, data, future_problems, enforceability, regulatory_friction, conversion_trust.",
+					"Return {\"questions\":<prior>,\"findings\":[{id,risk_types,severity,title,plain_language_explanation,clause_excerpt,suggested_rewrite,state_relevance,topics}]} \u2014 no URLs yet."
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "llm_clarify_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 960,
+					"y": 240
+				},
+				"measured": {
+					"width": 150,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_analyze_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_analyze_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1140,
+					"y": 240
+				},
+				"measured": {
+					"width": 140,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "prompt_citerank_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"STAGE 4 \u2014 Cite/Rank. Attach 1\u20132 citations per finding ONLY from CITATION PACK. Prefer official_statute > official_guidance > gov_explainer. Never invent URLs. Else citation_status=uncertain, citations=[].",
+					"Return the findings JSON with citations + citation_status filled.",
+					"CITATION PACK: [{\"label\":\"CA CLRA\",\"url\":\"https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CIV&division=3.&title=1.5.&part=4.&chapter=1.&article=\",\"trust\":\"official_statute\"},{\"label\":\"CA CCPA\",\"url\":\"https://oag.ca.gov/privacy/ccpa\",\"trust\":\"official_guidance\"},{\"label\":\"CA UCL \u00a717200\",\"url\":\"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&sectionNum=17200.\",\"trust\":\"official_statute\"},{\"label\":\"WA CPA RCW 19.86\",\"url\":\"https://app.leg.wa.gov/RCW/default.aspx?cite=19.86\",\"trust\":\"official_statute\"},{\"label\":\"WA AG privacy\",\"url\":\"https://www.atg.wa.gov/privacy\",\"trust\":\"gov_explainer\"},{\"label\":\"OR UTPA\",\"url\":\"https://www.oregonlegislature.gov/bills_laws/ors/ors646.html\",\"trust\":\"official_statute\"},{\"label\":\"Oregon DOJ Consumer Protection\",\"url\":\"https://www.doj.state.or.us/consumer-protection/\",\"trust\":\"gov_explainer\"},{\"label\":\"FTC .com Disclosures\",\"url\":\"https://www.ftc.gov/business-guidance/resources/com-disclosures-how-make-effective-disclosures-digital-world\",\"trust\":\"gov_explainer\"},{\"label\":\"CFPB bank accounts\",\"url\":\"https://www.consumerfinance.gov/consumer-tools/bank-accounts/\",\"trust\":\"gov_explainer\"}]"
+				],
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "llm_analyze_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1320,
+					"y": 240
+				},
+				"measured": {
+					"width": 150,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_citerank_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "prompt_citerank_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1500,
+					"y": 240
+				},
+				"measured": {
+					"width": 140,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "agent_chat_1",
+			"provider": "agent_rocketride",
+			"config": {
+				"agent_description": "FinTerms orchestrator \u2014 consolidates Scope\u2192Clarify\u2192Analyze\u2192Cite/Rank, optional Rewrite, enforces allowlisted citations and JSON Answers.",
+				"instructions": [
+					"You are the FinTerms Rocket Ride agent orchestrator. Input is the Cite/Rank stage output (or a rewrite request).",
+					"Validate JSON; keep founder-friendly tone; never invent citation URLs; if rewrite requested and accepted findings exist, return prior_draft + current_draft.",
+					"Otherwise return the findings (and clarifying questions if present) as the final Answers payload.",
+					"Prefer one wave. Return ONLY JSON."
+				],
+				"max_waves": 2,
+				"parameters": {}
+			},
+			"input": [
+				{
+					"lane": "questions",
+					"from": "llm_citerank_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1700,
+					"y": 230
+				},
+				"measured": {
+					"width": 200,
+					"height": 100
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "llm_agent_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o-mini",
+				"openai-4o-mini": {
+					"apikey": "${ROCKETRIDE_OPENAI_KEY}"
+				},
+				"parameters": {}
+			},
+			"control": [
+				{
+					"classType": "llm",
+					"from": "agent_chat_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1700,
+					"y": 420
+				},
+				"measured": {
+					"width": 160,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "memory_internal_1",
+			"provider": "memory_internal",
+			"config": {
+				"type": "memory_internal"
+			},
+			"control": [
+				{
+					"classType": "memory",
+					"from": "agent_chat_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1900,
+					"y": 420
+				},
+				"measured": {
+					"width": 160,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		},
+		{
+			"id": "response_chat_1",
+			"provider": "response_answers",
+			"config": {
+				"laneName": "answers"
+			},
+			"input": [
+				{
+					"lane": "answers",
+					"from": "agent_chat_1"
+				}
+			],
+			"ui": {
+				"position": {
+					"x": 1960,
+					"y": 240
+				},
+				"measured": {
+					"width": 170,
+					"height": 80
+				},
+				"nodeType": "default",
+				"formDataValid": true
+			}
+		}
+	],
+	"project_id": "c3f8a1d2-6b4e-4a9c-8d7f-2e1b0a9c8d7e",
+	"viewport": {
+		"x": 0,
+		"y": 0,
+		"zoom": 0.48
+	},
+	"version": 1
+}
