@@ -30,7 +30,7 @@ flowchart TB
       LLMWeb --> RAWeb[Return Answers]
     end
 
-    subgraph ChatPath["IDE / judging path · Chat Play"]
+    subgraph ChatPath["Chat path · IDE Play"]
       Chat[Chat] --> PS[Prompt · ScopeGate]
       PS --> LS[LLM]
       LS --> PC[Prompt · Clarify]
@@ -56,19 +56,9 @@ flowchart TB
   Agent -.-> Pack
 ```
 
-### Orchestration story (say this to judges)
+**Pipeline stages:** ScopeGate → Clarify → Analyze → Cite/Rank → Rewrite (Agent + Memory on the Chat path).
 
-| Stage | What Rocket Ride does |
-|-------|------------------------|
-| **ScopeGate** | Out-of-state / non-finance → polite expand-soon redirect |
-| **Clarify** | 3–5 founder questions (product, fees, data, disputes) |
-| **Analyze** | Exhaustive first-pass across money, rights, data, future problems, enforceability, regulatory friction, conversion/trust |
-| **Cite/Rank** | Attach 1–2 URLs **only** from the allowlisted pack (never invent links) |
-| **Rewrite** | Apply accepted suggestions → `prior_draft` + `current_draft` |
-| **Agent + Memory** | On the Chat path: validates/consolidates stage JSON across waves |
-
-**Website** hits the **Webhook** row (fast MODE-aware Prompt → LLM).  
-**Cursor Play / live graph walkthrough** uses the **Chat** row (explicit Prompt+LLM stages → Agent).
+**Website** uses the **Webhook** row. **Cursor Play** uses the **Chat** row.
 
 ```text
 UI ──► /api/pipeline ──► Rocket Ride Cloud (finterms.pipe)
@@ -76,7 +66,7 @@ UI ──► /api/pipeline ──► Rocket Ride Cloud (finterms.pipe)
               ┌───────────────┴───────────────┐
               ▼                               ▼
      Webhook → … → Answers            Chat → Scope → Clarify
-     (product)                        → Analyze → Cite/Rank
+                                      → Analyze → Cite/Rank
                                       → Agent(+Memory) → Answers
 ```
 
