@@ -1,0 +1,26 @@
+SAMPLE PAYMENTS TERMS OF SERVICE (DEMO — INTENTIONALLY RISKY)
+Last updated: July 17, 2026
+
+1. Acceptance
+By creating an account with PayWest Demo, Inc. ("Company"), you accept these Terms.
+
+2. Fees
+Company may change, add, or increase any fees at any time, including fees for existing customers, without prior notice. Continued use of the Service after a fee change constitutes acceptance. Fees are non-refundable in all cases.
+
+3. Dispute Resolution; Arbitration; Class Action Waiver
+Any dispute arising out of these Terms shall be resolved exclusively by binding arbitration in Delaware. YOU WAIVE ANY RIGHT TO A JURY TRIAL OR TO PARTICIPATE IN A CLASS ACTION. Company may seek injunctive relief in any court without arbitration. This clause survives termination and applies to the maximum extent permitted by law, including where state law would otherwise provide stronger consumer protections.
+
+4. Data Sharing
+You grant Company a perpetual, irrevocable, worldwide license to use, sell, share, and commercialize all account, transaction, device, and financial data with any third party for any purpose, including advertising and data brokerage, without additional notice or consent. Company has no obligation to delete your data upon account closure.
+
+5. Unilateral Changes
+Company may amend these Terms at any time by posting an update. Changes are effective immediately. Your sole remedy if you disagree is to stop using the Service; Company is not required to provide advance notice or an opt-out for material changes.
+
+6. Account Freeze and Closure
+Company may freeze, limit, or permanently close your account at any time, for any reason or no reason, without notice, and may retain funds for an indefinite investigation period without stating a timeline.
+
+7. Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, COMPANY IS NOT LIABLE FOR ANY DAMAGES OF ANY KIND, INCLUDING DIRECT DAMAGES, EVEN IF CAUSED BY COMPANY'S GROSS NEGLIGENCE. TOTAL LIABILITY SHALL NEVER EXCEED ONE DOLLAR ($1).
+
+8. Governing Law
+These Terms are governed by Delaware law without regard to conflicts of law, and without regard to mandatory consumer protections of your state of residence.

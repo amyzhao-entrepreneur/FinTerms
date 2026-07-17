@@ -1,0 +1,112 @@
+[
+  {
+    "id": "ca-clra",
+    "label": "California Consumers Legal Remedies Act (Civil Code §1750 et seq.)",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CIV&division=3.&title=1.5.&part=4.&chapter=1.&article=",
+    "states": ["CA"],
+    "topics": ["unfair_practices", "fees", "consumer_rights"],
+    "trust_tier": "official_statute",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "California Consumers Legal Remedies Act prohibits unfair or deceptive acts or practices in consumer transactions, including misrepresenting goods or services and unfair fee practices."
+  },
+  {
+    "id": "ca-ccpa",
+    "label": "California Consumer Privacy Act (CCPA) — oag.ca.gov",
+    "url": "https://oag.ca.gov/privacy/ccpa",
+    "states": ["CA"],
+    "topics": ["privacy", "data_sharing", "data"],
+    "trust_tier": "official_guidance",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "The CCPA gives consumers rights regarding personal information collected by businesses, including notice, access, deletion, and limits on sale or sharing of personal information."
+  },
+  {
+    "id": "ca-ufda",
+    "label": "California Unfair Competition Law (Bus. & Prof. Code §17200)",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&sectionNum=17200.",
+    "states": ["CA"],
+    "topics": ["unfair_practices", "fees", "conversion_trust"],
+    "trust_tier": "official_statute",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Unfair competition includes any unlawful, unfair or fraudulent business act or practice and unfair, deceptive, untrue or misleading advertising."
+  },
+  {
+    "id": "wa-cpa",
+    "label": "Washington Consumer Protection Act (RCW 19.86)",
+    "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=19.86",
+    "states": ["WA"],
+    "topics": ["unfair_practices", "fees", "consumer_rights"],
+    "trust_tier": "official_statute",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Washington's Consumer Protection Act declares unfair or deceptive acts or practices in trade or commerce unlawful and provides enforcement and consumer remedies."
+  },
+  {
+    "id": "wa-privacy",
+    "label": "Washington My Health My Data / privacy overview — Washington AG",
+    "url": "https://www.atg.wa.gov/privacy",
+    "states": ["WA"],
+    "topics": ["privacy", "data_sharing", "data"],
+    "trust_tier": "gov_explainer",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Washington Attorney General privacy resources address consumer privacy expectations, data practices, and related state protections relevant to how companies handle personal information."
+  },
+  {
+    "id": "or-ufa",
+    "label": "Oregon Unlawful Trade Practices Act (ORS 646.605 et seq.)",
+    "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors646.html",
+    "states": ["OR"],
+    "topics": ["unfair_practices", "fees", "consumer_rights"],
+    "trust_tier": "official_statute",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Oregon's Unlawful Trade Practices Act prohibits unconscionable tactics and unfair or deceptive conduct in trade or commerce, including certain fee and disclosure issues."
+  },
+  {
+    "id": "or-cpa",
+    "label": "Oregon Consumer Protection — Oregon DOJ",
+    "url": "https://www.doj.state.or.us/consumer-protection/",
+    "states": ["OR"],
+    "topics": ["unfair_practices", "consumer_rights", "conversion_trust"],
+    "trust_tier": "gov_explainer",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Oregon Department of Justice consumer protection guidance covers unfair business practices, scams, and consumer complaint processes relevant to consumer-facing companies."
+  },
+  {
+    "id": "ca-arbitration-note",
+    "label": "California courts — arbitration / unconscionability context (judicial branch resources)",
+    "url": "https://www.courts.ca.gov/programs-selfhelp.htm",
+    "states": ["CA"],
+    "topics": ["arbitration", "rights", "enforceability"],
+    "trust_tier": "gov_explainer",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "California consumer contract disputes frequently raise issues around arbitration clauses, class action waivers, and unconscionability; overbroad dispute waivers can face enforceability challenges."
+  },
+  {
+    "id": "ftc-dotcom",
+    "label": "FTC — .com Disclosures / digital notices guidance",
+    "url": "https://www.ftc.gov/business-guidance/resources/com-disclosures-how-make-effective-disclosures-digital-world",
+    "states": ["CA", "OR", "WA"],
+    "topics": ["fees", "auto_renewal", "unfair_practices", "conversion_trust"],
+    "trust_tier": "gov_explainer",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Federal Trade Commission guidance emphasizes clear, conspicuous disclosures for material terms, fees, and conditions in digital consumer interfaces."
+  },
+  {
+    "id": "cfpb-deposits",
+    "label": "CFPB — consumer banking / deposit account practices",
+    "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/",
+    "states": ["CA", "OR", "WA"],
+    "topics": ["fees", "account_closure", "future_problems", "money"],
+    "trust_tier": "gov_explainer",
+    "last_reviewed": "2026-01-15",
+    "superseded": false,
+    "snippet": "Consumer Financial Protection Bureau materials address deposit accounts, fees, account access, and practices that can surprise consumers in banking and payments products."
+  }
+]
