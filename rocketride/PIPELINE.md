@@ -31,7 +31,7 @@ Chat → Prompt ScopeGate → LLM
 | Node | Role |
 |------|------|
 | **Chat** | Cursor Play / live demo |
-| **Prompt + LLM ×4** | Explicit stages judges can point at |
+| **Prompt + LLM ×4** | Explicit stages on the Chat path |
 | **Agent** | Orchestrates / validates final JSON; uses Memory across waves |
 | **LLM (control)** | Model attached to the Agent |
 | **Memory** | Scratchpad between agent waves |

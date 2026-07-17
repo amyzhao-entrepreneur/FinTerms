@@ -1,6 +1,6 @@
 # Rocket Ride Cloud setup
 
-Rocket Ride hosts the **pipeline** judges expect to see live.
+Rocket Ride hosts the **pipeline** that powers FinTerms analysis.
 
 | Piece | Where |
 |-------|--------|
@@ -11,7 +11,7 @@ Rocket Ride hosts the **pipeline** judges expect to see live.
 ## Steps
 
 ### 1. Rocket Ride account
-Sign in at [https://rocketride.ai](https://rocketride.ai) (or your hackathon URL).
+Sign in at [https://rocketride.ai](https://rocketride.ai).
 
 ### 2. Cursor extension
 Install **RocketRide**, connect to Cloud host `https://api.rocketride.ai`, set `ROCKETRIDE_APIKEY` in `.env`.
